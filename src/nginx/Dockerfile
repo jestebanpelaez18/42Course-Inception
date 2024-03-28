@@ -1,5 +1,4 @@
-ARG VERSION=3.18
-FROM alpine:$(VERSION)
+FROM alpine:3.18
 
 #Install ngix and openssl, directory to save ssl keys and certificates, and the runtime file 
 #ngix   
@@ -12,15 +11,15 @@ mkdir -p /run/nginx /etc/nginx/ssl
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 -keyout /etc/nginx/ssl/certificates.key \
 -out /etc/nginx/ssl/certificates.crt \
--subj "/C=Finland/ST=Helsinki/O=Hive, Inc./CN=jpelaez" 
+-subj "/C=FI/ST=Helsinki/O=Hive/ CN=jpelaez" 
 
-RUN 
+#RUN 
 
 # We copy our configuration file in our current working directory
-COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+# COPY ./conf/default.conf /etc/nginx/http.d/default.conf
 
 #All the permissions
-RUN chmod +x /etc/nginx/nginx.conf
+#RUN chmod +x /etc/nginx/nginx.conf
 
 EXPOSE 443
 
