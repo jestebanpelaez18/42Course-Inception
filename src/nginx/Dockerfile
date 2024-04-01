@@ -16,10 +16,10 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 #RUN 
 
 # We copy our configuration file in our current working directory
-# COPY ./conf/default.conf /etc/nginx/http.d/default.conf
+COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 
 #All the permissions
-#RUN chmod +x /etc/nginx/nginx.conf
+RUN chmod +x /etc/nginx/nginx.conf
 
 EXPOSE 443
 
