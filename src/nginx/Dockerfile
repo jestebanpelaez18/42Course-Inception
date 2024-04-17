@@ -16,7 +16,10 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 #RUN 
 
 # We copy our configuration file in our current working directory
-COPY ./conf/nginx.conf /etc/nginx/nginx.conf
+COPY conf/nginx.conf /etc/nginx/nginx.conf
+
+# Copy the tools directory to the Nginx root directory (this just for test that nginx is working)
+COPY tools /usr/share/nginx/html/tools
 
 #All the permissions
 RUN chmod +x /etc/nginx/nginx.conf
