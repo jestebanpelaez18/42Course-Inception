@@ -1,5 +1,5 @@
 #! /bin/bash
 
-newUser='jpelaez-'
-newDbPassword='1234567'
-newDb="MariaDb container"
+service mysql start;
+
+mysql -e "CREATE DATABASE IF NOT EXISTS \`${db_name}\`;"
