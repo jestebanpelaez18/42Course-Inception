@@ -1,13 +1,33 @@
-# The MariaDB server
-
 [mysqld]
 
-# General settings
-datadir = /var/lib/mysql
-socket = /var/run/mysqld/mysqld.sock
+#
+# * Basic Settings
+#
+user                    = mysql
+pid-file                = /run/mysqld/mysqld.pid
+basedir                 = /usr
+datadir                 = /var/lib/mysql
+tmpdir                  = /tmp
+socket                  = /run/mysqld/mysqld.sock
+port                    = 3306
+skip-networking         = false
+lc_messages_dir         = /usr/share/mysql
+bind-address            = 0.0.0.0
 
-# Network settings
-bind-address = 0.0.0.0
-port = 3306
-user = mysql
+# When running under systemd, error logging goes via stdout/stderr to journald
+# and when running legacy init error logging goes to syslog due to
+# /etc/mysql/conf.d/mariadb.conf.d/50-mysqld_safe.cnf
+# Enable this if you want to have error logging into a separate file
+log_error = /var/log/mysql/error.err
+
+#
+# * Character sets
+#
+
+# MySQL/MariaDB default is Latin1, but in Debian we rather default to the full
+# utf8 4-byte character set. See also client.cnf
+character-set-server  = utf8mb4
+collation-server      = utf8mb4_general_ci
+query_cache_size        = 32M
+console					= true
 
