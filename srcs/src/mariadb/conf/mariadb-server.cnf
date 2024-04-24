@@ -18,7 +18,7 @@ bind-address            = 0.0.0.0
 # and when running legacy init error logging goes to syslog due to
 # /etc/mysql/conf.d/mariadb.conf.d/50-mysqld_safe.cnf
 # Enable this if you want to have error logging into a separate file
-log_error = /var/log/mysql/error.err
+#log_error = /var/log/mysql/error.err
 
 #
 # * Character sets

@@ -1,0 +1,74 @@
+#check docker-compose version command to see which version of docker-compose is installed
+# version: '3'
+
+#creates data on the host machine, making it easily
+#accessible for backup, inspection or use by other containers or applications
+volumes:
+  # wordpressdb:
+  #   name: wordpressdb
+  #   driver: local
+  #   driver_opts:
+  #     type: none
+  #     device: /home/yoonslee/data/wordpress
+  #     o: bind
+  
+  mariadb:
+    name: mariadb
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/jpelaez-/data/mariadb
+      o: bind
+
+#custom networks to facilitate communication between the containers
+networks:
+  inception_network:
+    name: inception_network
+
+#represents a containerized application or microservice. Dfines the image to use, env, ports to expose,
+#volumes to mount, and other related configuration to the service.
+services:
+  mariadb:
+    build:
+      context: ./src/mariadb/
+      dockerfile : Dockerfile
+    #use the image from our local repository, not from the Docker Hub
+    image: mariadb:jpelaez-
+    container_name: mariadb
+    networks:
+      - inception_network
+#    env_file: .env
+    volumes:
+       - mariadb:/var/lib/mysql
+    restart: always
+
+  # wordpress:
+  #   build:
+  #     context: ./requirements/wordpress/
+  #     dockerfile : Dockerfile
+  #   image: wordpress:yoonslee
+  #   container_name: wordpress
+  #   networks:
+  #     - inception_network
+  #   depends_on:
+  #     - mariadb
+  #   env_file: .env
+  #   volumes:
+  #    - wordpressdb:/var/www/html/
+  #   restart: always
+
+  # nginx:
+  #   build:
+  #     context: ./src/nginx/
+  #     dockerfile : Dockerfile
+  #   image: nginx:jpelaez-
+  #   container_name: nginx
+  #   ports:
+  #     - "443:443"
+  #   networks:
+  #     - inception_network
+  #   depends_on:
+  #     - wordpress
+  #   volumes:
+  #    - mariadb:/var/lib/mysql
+  #   restart: always
