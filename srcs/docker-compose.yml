@@ -1,8 +1,12 @@
-#check docker-compose version command to see which version of docker-compose is installed
-# version: '3'
+#In our case we need to run diferent microservices in differents containers, so for that we are gonna use 
+# docker compose which allow to communicatte all the containers in a single call
 
-#creates data on the host machine, making it easily
-#accessible for backup, inspection or use by other containers or applications
+version: '3' #version of the dodcker compose
+
+# A Docker volume allows data to persist, even when a container is deleted. 
+# Volumes are also a convenient way to share data between the host and the container. Docker Volumes are good
+# if you want push data to a Docker Container or if you want to pull the Data for a Docker container and also if you
+# want to share data between Docker container, which its what we want to do 
 volumes:
   # wordpressdb:
   #   name: wordpressdb
@@ -14,32 +18,52 @@ volumes:
   
   mariadb:
     name: mariadb
-    driver: local
-    driver_opts:
-      type: none
-      device: /Users/jpelaez-/data/mariadb
-      o: bind
+    driver: local #store the volume on the host file sistem
+    driver_opts: #driver options
+      type: none  #no specific device type is being used
+      device: /Users/jpelaez-/data/mariadb # specifies the path on the host filesystem where the volume data should be stored.
+      o: bind #The bind option is used to mount a host directory into the container. This is useful for volumes that need to be accessible from the host or other containers.
+
+
+#docker volume ls: list volumes
+
 
 #custom networks to facilitate communication between the containers
 networks:
   inception_network:
     name: inception_network
 
-#represents a containerized application or microservice. Dfines the image to use, env, ports to expose,
-#volumes to mount, and other related configuration to the service.
-services:
-  mariadb:
-    build:
-      context: ./src/mariadb/
-      dockerfile : Dockerfile
-    #use the image from our local repository, not from the Docker Hub
+# this reprensent all the configuration of one of the containers, in our docker compose. Here we define ports, networks, dockerfile 
+#location etc... We must to be carefull with the indentation, is very important here.
+
+services: #this tell docker how to build the image of the container
+  mariadb:  #name of the image project, basically the folder nane of the container.
+    build:  #build option say how to buidl the image
+      context: ./src/mariadb/ #We say where to find the Dockerfile
+      dockerfile : Dockerfile #name of the dockerfile
     image: mariadb:jpelaez-
-    container_name: mariadb
+    container_name: mariadb #container name 
+    networks:
+      - inception_network  #network that we are using for our program
+    env_file: .env
+    volumes:
+       - mariadb:/var/lib/mysql #volume use for mariadb, this is where we are gonna create the volume that maps mariadb
+    restart: always
+
+  nginx:
+    build:
+      context: ./src/nginx/
+      dockerfile : Dockerfile
+    image: nginx:jpelaez-
+    container_name: nginx
+    ports:
+      - "443:443"
     networks:
       - inception_network
-#    env_file: .env
-    volumes:
-       - mariadb:/var/lib/mysql
+    # depends_on:
+    #   - wordpress
+    # volumes:
+    #  - mariadb:/var/lib/mysql
     restart: always
 
   # wordpress:
@@ -55,20 +79,4 @@ services:
   #   env_file: .env
   #   volumes:
   #    - wordpressdb:/var/www/html/
-  #   restart: always
-
-  # nginx:
-  #   build:
-  #     context: ./src/nginx/
-  #     dockerfile : Dockerfile
-  #   image: nginx:jpelaez-
-  #   container_name: nginx
-  #   ports:
-  #     - "443:443"
-  #   networks:
-  #     - inception_network
-  #   depends_on:
-  #     - wordpress
-  #   volumes:
-  #    - mariadb:/var/lib/mysql
   #   restart: always
