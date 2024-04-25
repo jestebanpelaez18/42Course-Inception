@@ -8,13 +8,13 @@ version: '3' #version of the dodcker compose
 # if you want push data to a Docker Container or if you want to pull the Data for a Docker container and also if you
 # want to share data between Docker container, which its what we want to do 
 volumes:
-  # wordpressdb:
-  #   name: wordpressdb
-  #   driver: local
-  #   driver_opts:
-  #     type: none
-  #     device: /home/yoonslee/data/wordpress
-  #     o: bind
+  wordpressdb:
+    name: wordpressdb
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/jpelaez-/data/wordpress
+      o: bind
   
   mariadb:
     name: mariadb
@@ -60,23 +60,23 @@ services: #this tell docker how to build the image of the container
       - "443:443"
     networks:
       - inception_network
-    # depends_on:
-    #   - wordpress
-    # volumes:
-    #  - mariadb:/var/lib/mysql
+    depends_on:
+      - wordpress
+    volumes:
+      - mariadb:/var/lib/mysql
     restart: always
 
-  # wordpress:
-  #   build:
-  #     context: ./requirements/wordpress/
-  #     dockerfile : Dockerfile
-  #   image: wordpress:yoonslee
-  #   container_name: wordpress
-  #   networks:
-  #     - inception_network
-  #   depends_on:
-  #     - mariadb
-  #   env_file: .env
-  #   volumes:
-  #    - wordpressdb:/var/www/html/
-  #   restart: always
+  wordpress:
+    build:
+      context: ./src/wordpress/
+      dockerfile : Dockerfile
+    image: wordpress:jpelaez-
+    container_name: wordpress
+    networks:
+      - inception_network
+    depends_on:   #This option ensures that your containers will start in order of dependency, with the wordpress container starting after the db container.
+       - mariadb
+    env_file: .env
+    volumes:
+     - wordpressdb:/var/www/html/
+    restart: always
