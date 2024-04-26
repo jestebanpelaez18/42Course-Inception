@@ -1,13 +1,22 @@
 #Start and build docker compose service, then start the containers
-FILES_PATH = /Users/jpelaez-/data
+#FILES_PATH = /Users/jpelaez-/data
+FILES_PATH = /home/jpelaez-/data #virtual machine
 all:
 	@if [ ! -d "$(FILES_PATH)/mariadb" ]; then \
-		mkdir -p $(FILES_PATH)/mariadb; \
-		chmod -R 777 $(FILES_PATH)/mariadb; \
+		sudo mkdir -p $(FILES_PATH)/mariadb; \
+		sudo chmod -R 777 $(FILES_PATH)/mariadb; \
 	fi
 	@if [ ! -d "$(FILES_PATH)/wordpress" ]; then \
-		mkdir -p $(FILES_PATH)/wordpress; \
-		chmod -R 777 $(FILES_PATH)/wordpress; \
+		sudo mkdir -p $(FILES_PATH)/wordpress; \
+		sudo chmod -R 777 $(FILES_PATH)/wordpress; \
+	fi
+	@if ! grep -q "jpelaez-.42.fr" /etc/hosts; then \
+		sudo chmod 777 /etc/hosts; \
+		echo "127.0.0.1 jpelaez-.42.fr" >> /etc/hosts; \
+	fi
+	@if ! grep -q "jpelaez-.42.fr" /etc/hosts; then \
+		sudo chmod 777 /etc/hosts; \
+		echo "127.0.0.1 jpelaez-.42.fr" >> /etc/hosts; \
 	fi
 	docker-compose -f srcs/docker-compose.yml up -d
 
