@@ -63,7 +63,7 @@ services: #this tell docker how to build the image of the container
     depends_on:
       - wordpress
     volumes:
-      - wordpressdb:/var/lib/mysql
+      - /home/jpelaez-/data/wordpressdb:/var/www/html/
     restart: always
 
   wordpress:
@@ -78,5 +78,5 @@ services: #this tell docker how to build the image of the container
        - mariadb
     env_file: .env
     volumes:
-     - wordpressdb:/var/www/html/
+     - /home/jpelaez-/data/wordpressdb:/var/www/html/
     restart: always
