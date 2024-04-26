@@ -13,7 +13,11 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 -out /etc/nginx/ssl/certificates.crt \
 -subj "/C=FI/ST=Helsinki/O=Hive/ CN=jpelaez" 
 
-#RUN 
+RUN     addgroup -S www && \
+	adduser -S -H -g "" www -G www && \
+	mkdir /www && \
+	chown -R www:www /var/lib/nginx && \
+	chown -R www:www /www 
 
 # We copy our configuration file in our current working directory
 COPY conf/nginx.conf /etc/nginx/nginx.conf

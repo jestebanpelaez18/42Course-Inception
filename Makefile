@@ -5,8 +5,12 @@ all:
 		mkdir -p $(FILES_PATH)/mariadb; \
 		chmod -R 777 $(FILES_PATH)/mariadb; \
 	fi
-
+	@if [ ! -d "$(FILES_PATH)/wordpress" ]; then \
+		mkdir -p $(FILES_PATH)/wordpress; \
+		chmod -R 777 $(FILES_PATH)/wordpress; \
+	fi
 	docker-compose -f srcs/docker-compose.yml up -d
+
 
 #Stop and remove all the container and the images
 clean:
