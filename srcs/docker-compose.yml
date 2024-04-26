@@ -47,7 +47,7 @@ services: #this tell docker how to build the image of the container
       - inception_network  #network that we are using for our program
     env_file: .env
     volumes:
-       - mariadb:/var/lib/mysql #volume use for mariadb, this is where we are gonna create the volume that maps mariadb
+       - /home/jpelaez-/data/mariadb:/var/lib/mysql #volume use for mariadb, this is where we are gonna create the volume that maps mariadb
     restart: always
 
   nginx:
@@ -63,7 +63,7 @@ services: #this tell docker how to build the image of the container
     depends_on:
       - wordpress
     volumes:
-      - mariadb:/var/lib/mysql
+      - wordpressdb:/var/lib/mysql
     restart: always
 
   wordpress:
