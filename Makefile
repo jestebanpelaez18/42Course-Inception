@@ -18,12 +18,12 @@ all:
 		sudo chmod 777 /etc/hosts; \
 		echo "127.0.0.1 jpelaez-.42.fr" >> /etc/hosts; \
 	fi
-	docker-compose -f srcs/docker-compose.yml up -d
+	sudo docker-compose -f srcs/docker-compose.yml up -d
 
 
 #Stop and remove all the container and the images
 clean:
-	docker-compose -f srcs/docker-compose.yml down --rmi all -v
+	sudo docker-compose -f srcs/docker-compose.yml down --rmi all -v
 
 fclean: clean
 
@@ -31,14 +31,14 @@ re: fclean all
 
 #Create and start containers
 up:
-	docker-compose -f srcs/docker-compose.yml up -d
+	sudo docker-compose -f srcs/docker-compose.yml up -d
 
 #list the containers
 ps:
-	docker-compose -f srcs/docker-compose.yml ps
+	sudo docker-compose -f srcs/docker-compose.yml ps
 
 #Stop and remove containers (Images are not deleted)
 down:
-	docker-compose -f srcs/docker-compose.yml down
+	sudo docker-compose -f srcs/docker-compose.yml down
 
 .PHONY: all clean fclean re up ps down
