@@ -13,7 +13,7 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /Users/jpelaez-/data/wordpress
+      device: /home/jpelaez-/data/wordpress
       o: bind
   
   mariadb:
@@ -21,7 +21,7 @@ volumes:
     driver: local #store the volume on the host file sistem
     driver_opts: #driver options
       type: none  #no specific device type is being used
-      device: /Users/jpelaez-/data/mariadb # specifies the path on the host filesystem where the volume data should be stored.
+      device: /home/jpelaez-/data/mariadb # specifies the path on the host filesystem where the volume data should be stored.
       o: bind #The bind option is used to mount a host directory into the container. This is useful for volumes that need to be accessible from the host or other containers.
 
 
