@@ -18,7 +18,8 @@ COPY script/wp.sh /tmp/wordpress.sh
 RUN chmod +x /tmp/wordpress.sh
 
 # Copy the PHP-FPM configuration file
-COPY conf/www.conf /etc/php/81/fpm/pool.d/www.conf
+COPY conf/www.conf /etc/php81/php-fpm.d/www.conf
+
 
 EXPOSE 9000
 

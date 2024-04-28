@@ -61,7 +61,7 @@ wp option update siteurl "https://$DOMAIN_NAME" --allow-root
 wp option update home "https://$DOMAIN_NAME" --allow-root
 
 # Transfer ownership to the user
-chown -R nginx:nginx /var/www/html/wordpress
+chown -R www:www /var/www/html/wordpress
 
 # Full permissions for owner, read/exec to others
 chmod -R 755 /var/www/html/wordpress

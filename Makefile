@@ -26,6 +26,10 @@ clean:
 	sudo docker-compose -f srcs/docker-compose.yml down --rmi all -v
 
 fclean: clean
+	@if [ -d $(FILES_PATH) ]; then \
+			sudo rm -rf $(FILES_PATH); \
+	fi;
+	docker system prune -f
 
 re: fclean all
 
