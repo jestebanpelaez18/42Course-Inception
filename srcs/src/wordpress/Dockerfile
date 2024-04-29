@@ -1,5 +1,8 @@
 FROM alpine:3.18
 
+# Create user and group
+RUN addgroup -S www && adduser -S -H -G www www
+
 # Update and install dependencies
 RUN apk update && \
     apk add --no-cache \
@@ -8,8 +11,6 @@ RUN apk update && \
     php81-mysqli php81-json php81-openssl \
     php81-cgi php81-fpm
 
-# Create user and group
-RUN addgroup -S www && adduser -S -H -G www www
 
 EXPOSE 9000
 
@@ -19,8 +20,8 @@ RUN mkdir -p /run/php/ /var/www/html/wordpress/
 # Copy the PHP-FPM configuration file
 COPY conf/www.conf /etc/php81/php-fpm.d/www.conf
 
-COPY script/wordpress.sh /tmp/wordpress.sh
+COPY ./script/wordpress.sh /
 RUN chmod +x /tmp/wordpress.sh
 
 
-CMD ["sh", "/tmp/wordpress.sh"]
+CMD ["sh", "/wordpress.sh"]
