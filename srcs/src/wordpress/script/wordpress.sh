@@ -53,7 +53,7 @@ echo hola222
 wp theme install neve\
 	--activate \
 	--allow-root
-echo hola222
+
 # Update plugins
 wp plugin update --all
 
@@ -62,10 +62,10 @@ wp option update siteurl "https://$DOMAIN_NAME" --allow-root
 wp option update home "https://$DOMAIN_NAME" --allow-root
 
 # Transfer ownership to the user
-chown -R www:www /var/www/html
+chown -R www:www /var/www/html/wordpress
 
 # Full permissions for owner, read/exec to others
-chmod -R 755 /var/www/html
+chmod -R 755 /var/www/html/wordpress
 
 # Fire up PHP-FPM (-F to keep in foreground and avoid recalling script)
 php-fpm81 -F
