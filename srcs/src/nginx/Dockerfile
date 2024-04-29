@@ -7,6 +7,8 @@ RUN apk update &&\
  apk add --no-cache nginx openssl &&\ 
 mkdir -p /run/nginx /etc/nginx/ssl
 
+EXPOSE 443
+
 # Create the SSL key
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 -keyout /etc/nginx/ssl/certificates.key \
@@ -22,12 +24,7 @@ RUN     addgroup -S www && \
 # We copy our configuration file in our current working directory
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
-# Copy the tools directory to the Nginx root directory (this just for test that nginx is working)
-COPY tools /usr/share/nginx/html/tools
-
 #All the permissions
 RUN chmod +x /etc/nginx/nginx.conf
 
-EXPOSE 443
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-c", "/etc/nginx/nginx.conf" ,"-g", "daemon off;"]
