@@ -21,7 +21,7 @@ RUN mkdir -p /run/php/ /var/www/html/wordpress/
 COPY conf/www.conf /etc/php81/php-fpm.d/www.conf
 
 COPY ./script/wordpress.sh /
-RUN chmod +x /tmp/wordpress.sh
+RUN chmod +x wordpress.sh
 
 
 CMD ["sh", "/wordpress.sh"]
