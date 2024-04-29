@@ -1,27 +1,34 @@
 FROM alpine:3.18
 
-# Create user and group
-RUN addgroup -S www && adduser -S -H -G www www
+# Create user nginx and add to primary and secondary group nginx (create if it doesn't exist)
+RUN addgroup -S www && \
+	adduser -S -G www -g www www
 
-# Update and install dependencies
 RUN apk update && \
-    apk add --no-cache \
-    wget php81 mariadb-client \
-    curl bash \
-    php81-mysqli php81-json php81-openssl \
-    php81-cgi php81-fpm
+	apk add --no-cache \
+	php81 \
+	php81-fpm \
+	php81-cgi \
+	php81-phar \
+	php81-json \
+	php81-mysqli \
+	php81-curl \
+	php81-iconv \
+	curl \
+	wget \
+	composer \
+	bash \
+	mariadb-client
 
-
+# Listening port
 EXPOSE 9000
 
-# Create necessary directories
+# Create and copy paths and confs to cont
 RUN mkdir -p /run/php/ /var/www/html/wordpress/
 
-# Copy the PHP-FPM configuration file
 COPY conf/www.conf /etc/php81/php-fpm.d/www.conf
 
-COPY ./script/wordpress.sh /
+COPY ./tools/wordpress.sh /
 RUN chmod +x wordpress.sh
 
-
-CMD ["sh", "/wordpress.sh"]
+ENTRYPOINT ["sh", "/wordpress.sh"]
