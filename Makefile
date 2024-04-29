@@ -18,6 +18,7 @@ all:
 		sudo chmod 777 /etc/hosts; \
 		echo "127.0.0.1 jpelaez-.42.fr" >> /etc/hosts; \
 	fi
+	sudo docker-compose -f srcs/docker-compose.yml build
 	sudo docker-compose -f srcs/docker-compose.yml up -d
 
 
