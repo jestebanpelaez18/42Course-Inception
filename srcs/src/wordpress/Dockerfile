@@ -11,16 +11,16 @@ RUN apk update && \
 # Create user and group
 RUN addgroup -S www && adduser -S -H -G www www
 
+EXPOSE 9000
+
 # Create necessary directories
 RUN mkdir -p /run/php/ /var/www/html/wordpress/
-
-COPY script/wordpress.sh /tmp/wordpress.sh
-RUN chmod +x /tmp/wordpress.sh
 
 # Copy the PHP-FPM configuration file
 COPY conf/www.conf /etc/php81/php-fpm.d/www.conf
 
+COPY script/wordpress.sh /tmp/wordpress.sh
+RUN chmod +x /tmp/wordpress.sh
 
-EXPOSE 9000
 
 CMD ["sh", "/tmp/wordpress.sh"]
