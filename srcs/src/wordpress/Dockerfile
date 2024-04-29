@@ -14,7 +14,7 @@ RUN addgroup -S www && adduser -S -H -G www www
 # Create necessary directories
 RUN mkdir -p /run/php/ && mkdir -p /var/www/html/wordpress/
 
-COPY script/wp.sh /tmp/wordpress.sh
+COPY script/wordpress.sh /tmp/wordpress.sh
 RUN chmod +x /tmp/wordpress.sh
 
 # Copy the PHP-FPM configuration file
