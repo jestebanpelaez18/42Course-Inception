@@ -61,9 +61,10 @@ wp plugin update --all
 wp option update siteurl "https://$DOMAIN_NAME" --allow-root
 wp option update home "https://$DOMAIN_NAME" --allow-root
 
+echo hola33
 # Transfer ownership to the user
 chown -R www:www /var/www/html/wordpress
-
+echo hola111
 # Full permissions for owner, read/exec to others
 chmod -R 755 /var/www/html/wordpress
 
