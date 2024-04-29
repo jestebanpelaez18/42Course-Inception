@@ -12,7 +12,7 @@ RUN apk update && \
 RUN addgroup -S www && adduser -S -H -G www www
 
 # Create necessary directories
-RUN mkdir -p /run/php/ && mkdir -p /var/www/html/wordpress/
+RUN mkdir -p /run/php/ /var/www/html/wordpress/
 
 COPY script/wordpress.sh /tmp/wordpress.sh
 RUN chmod +x /tmp/wordpress.sh
