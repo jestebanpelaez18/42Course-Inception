@@ -11,7 +11,7 @@ mkdir -p /run/nginx /etc/nginx/ssl
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 -keyout /etc/nginx/ssl/certificates.key \
 -out /etc/nginx/ssl/certificates.crt \
--subj "/C=FI/ST=Helsinki/O=Hive/ CN=jpelaez" 
+-subj "/C=FI/ST=Helsinki/O=Hive/ CN=jpelaez-" 
 
 RUN     addgroup -S www && \
 	adduser -S -H -g "" www -G www && \
