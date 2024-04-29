@@ -40,6 +40,7 @@ wp core install \
 	--skip-email \
 	--path=/var/www/html/wordpress/
 
+echo holaa
 # Create WordPress user
 wp user create \
 	$WORDPRESS_USER \
@@ -47,12 +48,12 @@ wp user create \
 	--role=author \
 	--user_pass=$WORDPRESS_PASSWORD \
 	--allow-root
-
+echo hola222
 # Install theme for WordPress
 wp theme install neve\
 	--activate \
 	--allow-root
-
+echo hola222
 # Update plugins
 wp plugin update --all
 
@@ -61,10 +62,10 @@ wp option update siteurl "https://$DOMAIN_NAME" --allow-root
 wp option update home "https://$DOMAIN_NAME" --allow-root
 
 # Transfer ownership to the user
-chown -R www:www /var/www/html/wordpress
+chown -R www:www /var/www/html
 
 # Full permissions for owner, read/exec to others
-chmod -R 755 /var/www/html/wordpress
+chmod -R 755 /var/www/html
 
 # Fire up PHP-FPM (-F to keep in foreground and avoid recalling script)
 php-fpm81 -F
