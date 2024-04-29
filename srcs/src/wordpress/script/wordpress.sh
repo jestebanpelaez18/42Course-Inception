@@ -70,3 +70,5 @@ chmod -R 755 /var/www/html/wordpress
 
 # Fire up PHP-FPM (-F to keep in foreground and avoid recalling script)
 php-fpm81 -F
+
+echo illo
