@@ -22,9 +22,9 @@ wp core download --allow-root
 
 # Create WordPress database config
 wp config create \
-	--dbname=$WORDPRESS_DB_NAME \
-	--dbuser=$WORDPRESS_DB_USER \
-	--dbpass=$WORDPRESS_DB_PASSWORD \
+	--dbname=$MARIA_DB_NAME \
+	--dbuser=$MARIA_DB_USER \
+	--dbpass=$MARIA_DB_PASSWORD \
 	--dbhost=$MYSQL_HOST \
 	--path=/var/www/html/wordpress/ \
 	--force
