@@ -28,7 +28,7 @@ RUN mkdir -p /run/php/ /var/www/html/wordpress/
 
 COPY conf/www.conf /etc/php81/php-fpm.d/www.conf
 
-COPY ./tools/wordpress.sh /
+COPY ./script/wordpress.sh /
 RUN chmod +x wordpress.sh
 
 ENTRYPOINT ["sh", "/wordpress.sh"]
