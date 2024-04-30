@@ -40,7 +40,6 @@ wp core install \
 	--skip-email \
 	--path=/var/www/html/wordpress/
 
-echo holaa
 # Create WordPress user
 wp user create \
 	$WORDPRESS_USER \
@@ -48,9 +47,9 @@ wp user create \
 	--role=author \
 	--user_pass=$WORDPRESS_PASSWORD \
 	--allow-root
-echo hola222
+
 # Install theme for WordPress
-wp theme install neve\
+wp theme install inspiro \
 	--activate \
 	--allow-root
 
@@ -61,10 +60,8 @@ wp plugin update --all
 wp option update siteurl "https://$DOMAIN_NAME" --allow-root
 wp option update home "https://$DOMAIN_NAME" --allow-root
 
-echo hola33
 # Transfer ownership to the user
 chown -R www:www /var/www/html/wordpress
-echo hola111
 # Full permissions for owner, read/exec to others
 chmod -R 755 /var/www/html/wordpress
 
