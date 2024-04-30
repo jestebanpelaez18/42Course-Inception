@@ -12,21 +12,6 @@ chown -R mysql:mysql /var/lib/mysql
 # init database
 mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm > /dev/null
 
-# his part of the script starts the MariaDB server in bootstrap mode, which allows it to execute SQL commands without requiring authentication.
-# mysqld --user=mysql --bootstrap << EOF
-# USE mysql;
-# FLUSH PRIVILEGES;
-
-# ALTER USER 'root'@'localhost' IDENTIFIED BY '12345';
-# CREATE DATABASE mariadb CHARACTER SET utf8 COLLATE utf8_general_ci;
-# CREATE USER 'jpelaez-'@'%' IDENTIFIED by 'hola';
-# GRANT ALL PRIVILEGES ON mariadb.* TO 'jpelaez-'@'%';
-# GRANT ALL PRIVILEGES ON *.* TO 'jpelaez-'@'%' IDENTIFIED BY 'hola' WITH GRANT OPTION;
-# GRANT SELECT ON mysql.* TO 'jpelaez-'@'%';
-
-# FLUSH PRIVILEGES;
-# EOF
-
 mysqld --user=mysql --bootstrap << EOF
 USE mysql;
 FLUSH PRIVILEGES;
