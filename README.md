@@ -29,8 +29,8 @@ An example diagram of the expected result:
 
 
 
+<img width="481" alt="Screenshot 2024-05-24 at 20 15 07" src="https://github.com/jestebanpelaez18/42Course-Inception/assets/101594895/9acb28f0-f0ab-4a02-ac9a-6c8b6fb687eb">
 
-![Diagram](https://imgur.com/LlPSjVI)
 
 
 ## Installation
