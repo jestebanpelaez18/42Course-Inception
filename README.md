@@ -35,23 +35,24 @@ An example diagram of the expected result:
 
 ## Installation
 ## Concepts
-
 ### What is a container ?
-Containers is like a box that contains everything our application need to run, everything that our application needs
-is ¡nside there. These makes everything simple, because we can run it in any computer, we dont need to worry about instalation, updates ... 
+Containers function as encapsulated environments that include all the necessary components for an application to run. By packaging all dependencies within the container, it ensures consistency and simplifies deployment across various computing environments. This eliminates concerns about installation and updates, as the container includes everything required.
 
-Docker will handle those containers.
+Docker manages these containers, streamlining the process of building, deploying, and running applications
 
 ### Docker images 
 
-They are like blueprints for Containers, and it contents the next things:
--Runtime Enviroment
--Application code
--Any dependencies
--Extran config
--Commands
+Certainly! Here's a more professional version:
 
-So basically when we run a image, we are creating a container, it means we are running our application. The containers are isolated, it already have everything for run the application no matter what version we have in our computer, it works independet. Because of that we can share the image with many users, and they dont need to install anything in his computer, everything is done by docker.
+Images serve as blueprints for containers and include the following components:
+
+- Runtime environment
+- Application code
+- Dependencies
+- Additional configurations
+- Commands
+
+When an image is executed, a container is created, effectively running the application. These containers are self-contained and isolated, ensuring that the application runs consistently regardless of the host system's configuration. This isolation allows the image to be shared with multiple users, eliminating the need for them to install anything on their machines, as Docker manages all necessary aspects.
 
 ### Docker Commands
 
